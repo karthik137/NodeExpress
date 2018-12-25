@@ -1,6 +1,6 @@
 var rect = require('./rectangle');
 var square = require('./square');
-
+/*
 function solveRect(l,b){
     console.log("Solving for rectangle with l = "+l+" and b = "+b);
     
@@ -11,7 +11,32 @@ function solveRect(l,b){
         console.log("The perimeter of the rectangle is : "+rect.perimeter(l,b));
     }
 }
+*/
 
+
+function solveRect(l,b){
+    console.log("Solving for rectangle with l = "+l+" and b = "+b);
+    
+    rect(l,b, (err, rectangle) => {
+        if(err) {
+            console.log("ERROR: ", err.message);
+        }else{
+            console.log("The area of rectangle of dimensions of l and b = "+rectangle.area());
+            console.log("The perimeter of the rectangle is : "+rectangle.perimeter());
+        }
+
+    });
+}
+
+
+
+
+
+
+
+
+
+/*
 function solveSquare(a){
     console.log("Solving for square with side a = "+a);
 
@@ -21,12 +46,12 @@ function solveSquare(a){
         console.log("The are  of square is : "+square.area(a));
     }
 }
+*/
 
-/*
 solveRect(2,4);
 solveRect(3,5);
 solveRect(0,5);
 solveRect(-3,5);
-*/
 
-solveSquare(10);
+
+//solveSquare(10);
