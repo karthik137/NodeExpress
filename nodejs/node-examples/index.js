@@ -1,4 +1,6 @@
 var rect = require('./rectangle');
+var tri = require('./traingle');
+
 //var square = require('./square');
 /*
 function solveRect(l,b){
@@ -48,6 +50,20 @@ function solveRect(l,b) {
 };
 
 
+function solveTriangle(base,height){
+    tri.areaOfTriangle(base, height, (err, triangle) => {
+        if(err){
+            console.log("ERROR : "+err.message);
+        }else{
+            console.log("area of triangle is : "+triangle());
+        }
+
+        console.log("Printing after the call")
+    });
+}
+
+solveTriangle(4,8);
+
 
 
 
@@ -65,10 +81,11 @@ function solveSquare(a){
 }
 */
 
+/*
 solveRect(2,4);
 solveRect(3,5);
 solveRect(0,5);
 solveRect(-3,5);
-
+*/
 
 //solveSquare(10);
