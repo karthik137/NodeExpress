@@ -3,6 +3,7 @@ const http = require('http');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
+const dishRouter = require('./routes/dishRouter');
 const hostname = 'localhost';
 const port = 3000;
 
@@ -11,6 +12,8 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 
+// In express app any request coming to /dishes will be handled by dishRouter
+app.use('/dishes', dishRouter);
 
 app.all('/dishes', (req, res, next) => {
     res.statusCode = 200;
@@ -18,6 +21,7 @@ app.all('/dishes', (req, res, next) => {
     next();
 });
 
+/*
 app.get('/dishes', (req, res, next) => {
     console.log("This is dishes get");
     res.end('Will send all the dishes to you');
@@ -37,10 +41,11 @@ app.delete('/dishes', (req, res, next) => {
     //res.statusCode = 403;
     res.end('Deleting all the dishes');
 });
-
+*/
 
 
 // with :dishid
+/*
 app.get('/dishes/:dishId', (req, res, next) => {
     res.end('Will send details of the dish: '+req.params.dishId);
 });
@@ -59,7 +64,7 @@ app.delete('/dishes/:dishId', (req, res, next) => {
     //res.statusCode = 403;
     res.end('Deleting all the dishes');
 });
-
+*/
 
 app.use((req, res, next) => {
     //console.log(req.headers);
