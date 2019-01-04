@@ -35,6 +35,8 @@ mongoclient.connect(url, (err, client) => {
 
 */
 
+//NOTE: this is callback hell code :( Use promises to solve callback hell problem
+/*
 mongoclient.connect(url, (err, client) => {
     assert.equal(err, null);
 
@@ -62,3 +64,47 @@ mongoclient.connect(url, (err, client) => {
         });
     });
 });
+*/
+
+mongoclient.connect(url).then((client) => {
+        //assert.equal(err, null);
+
+        console.log("Connected correctly to the server");
+        const db = client.db(dbName);
+
+        dboper.insertDocument(db, {
+                name: "vadonut",
+                description: "Test"
+            }, 'dishes')
+            .then((result) => {
+                console.log('Insert Document:\n', result.ops);
+
+                return dboper.findDocuments(db, "dishes")
+
+            })
+            .then((docs) => {
+                console.log("Found documents:\n ", docs);
+
+                return dboper.updateDocument(db, {
+                    name: 'vadonut'
+                }, {
+                    description: 'Updated Test'
+                }, 'dishes')
+            })
+            .then((result) => {
+                console.log("Updated Document:\n ", result.result);
+
+                return dboper.findDocuments(db, "dishes")
+            })
+            .then((docs) => {
+                console.log("Found documents:\n ", docs);
+
+                return db.dropCollection('dishes')
+            })
+            .then((result) => {
+                console.log("Dropped collection: " + result);
+                client.close();
+            }).catch((err) => console.log("Error : " + err));
+
+    })
+    .catch((err) => console.log("Error : " + err));
