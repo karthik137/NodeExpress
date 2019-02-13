@@ -52,4 +52,15 @@ dishRouter.route('/:dishId')
     res.end('Deleting all the dishes');
 });
 
+dishRouter.route('/washDish/cleanBySoap')
+.all((req, res, next) => {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    next();
+})
+.get((req, res, next) => {
+    res.end("Washby cleanBy soap done");
+});
+
+
 module.exports = dishRouter;
