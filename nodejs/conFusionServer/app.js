@@ -30,6 +30,15 @@ connect.then((db) => {
 });
 
 var app = express();
+app.all('*', (req, res, next) => {
+  if (req.secure) {
+    return next();
+  }
+  else{
+    res.redirect(307, 'https://' + req.hostname + ':' + app.get('secPort') + req.url);  //307 user end use same endpoint
+  }
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
